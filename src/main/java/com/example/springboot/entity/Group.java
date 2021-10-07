@@ -1,21 +1,23 @@
 package com.example.springboot.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
-@Table(name = "user")
+@Table(name = "group")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
-public class User {
+public class Group {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,15 +27,9 @@ public class User {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "age")
-    private int age;
-
-    @Column(name = "email")
-    private String email;
-
     @JsonIgnore
-    @JsonBackReference(value = "group-user")
-    @ManyToOne
-    @JoinColumn(name = "group_id")
-    private Group group;
+    @JsonManagedReference(value = "group-user")
+    @ToString.Exclude
+    @OneToMany(mappedBy = "group")
+    private List<User> users;
 }
