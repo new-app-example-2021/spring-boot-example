@@ -31,9 +31,9 @@ public class User {
     @Column(name = "email")
     private String email;
 
-    @JsonIgnore
-    @JsonBackReference(value = "group-user")
-    @ManyToOne
-    @JoinColumn(name = "group_id")
-    private Group group;
+//    @JsonIgnore
+//    @JsonBackReference(value = "group-user")
+//    @ManyToOne
+//    @JoinColumn(name = "group_id")
+//    private Group group;
 }
